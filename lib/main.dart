@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'question.dart';
+import 'Quiz.dart';
 
+Quiz quizBrain = Quiz();
 
 void main() => runApp(Quizzler());
 
@@ -29,13 +30,7 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
 
   List <Icon> scoreKeeper=[];
-  
-  List <Question> questions =[
-    Question(que: 'If you travel faster than the speed of light, you’ll age less', ans: true),
-    Question(que: 'Pi is an irrational number', ans: false),
-    Question(que: 'Time goes slower at the top of the building than at the bottom', ans: false),
-    Question(que: 'The gyroscopic effect keeps a bike balanced', ans: true),
-  ];
+
 
 
   int questionNumber = 0;
@@ -52,7 +47,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[questionNumber].questionText,
+                quizBrain.questions[questionNumber].questionText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -77,7 +72,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
 
-                bool correctAnswer = questions[questionNumber].questionAnswer;
+                bool correctAnswer = quizBrain.questions[questionNumber].questionAnswer;
                 if(correctAnswer == true){
                     print('user got it right');
                 }else{
@@ -86,6 +81,7 @@ class _QuizPageState extends State<QuizPage> {
 
                 setState(() {
                   scoreKeeper.add(Icon(Icons.check,color: Colors.green,));
+                  questionNumber++;
                 });
               },
             ),
@@ -105,7 +101,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
 
-                bool correctAnswer = questions[questionNumber].questionAnswer;
+                bool correctAnswer = quizBrain.questions[questionNumber].questionAnswer;
                 if(correctAnswer == false){
                   print('user got it right');
                 }else{
@@ -115,6 +111,7 @@ class _QuizPageState extends State<QuizPage> {
                 setState(() {
                   questionNumber++;
                 });
+
                 },
             ),
           ),
